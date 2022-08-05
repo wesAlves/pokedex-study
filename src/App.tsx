@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { pokedex } from "./api/api";
+import { PokeCard } from "./components/pokeCard";
 
 interface PokemonData {
   name: string;
@@ -8,6 +9,7 @@ interface PokemonData {
 
 const App = () => {
   const [pokemons, setPokemons] = useState<PokemonData[]>([]);
+  const [count, setCount] = useState(0);
   const [next, setNext] = useState();
   const [previous, setPrevious] = useState();
 
@@ -15,6 +17,7 @@ const App = () => {
     try {
       const response = await pokedex.get("/pokemon");
       console.log(response.data);
+      setCount(response.data.count);
       setPokemons(response.data.results);
       setNext(response.data.next);
       setPrevious(response.data.previous);
@@ -30,15 +33,11 @@ const App = () => {
   return (
     <>
       {pokemons.map(({ name, url }: PokemonData) => {
-        return (
-          <div key={name}>
-            <h3>{name}</h3>
-            <a href={url}>Details</a>
-          </div>
-        );
+        return <PokeCard key={name} name={name} url={url} imageURL={""} />;
       })}
+
       <button>Previous</button>
-      123
+      {Math.floor(count / 20)}
       <button>Next</button>
     </>
   );
