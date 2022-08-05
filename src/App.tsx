@@ -10,12 +10,12 @@ interface PokemonData {
 const App = () => {
   const [pokemons, setPokemons] = useState<PokemonData[]>([]);
   const [count, setCount] = useState(0);
-  const [next, setNext] = useState();
-  const [previous, setPrevious] = useState();
+  const [next, setNext] = useState("");
+  const [previous, setPrevious] = useState("");
 
-  const getPokemons = async () => {
+  const getPokemons = async (url: string) => {
     try {
-      const response = await pokedex.get("/pokemon");
+      const response = await pokedex.get(url);
       console.log(response.data);
       setCount(response.data.count);
       setPokemons(response.data.results);
@@ -27,18 +27,31 @@ const App = () => {
   };
 
   useEffect(() => {
-    getPokemons();
+    getPokemons("/pokemon");
   }, []);
+
+  // const handleNext = (next) => {
+  //   getPokemons()
+  // }
 
   return (
     <>
-      {pokemons.map(({ name, url }: PokemonData) => {
-        return <PokeCard key={name} name={name} url={url} imageURL={""} />;
-      })}
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          maxWidth: "800px",
+          flexWrap: "wrap",
+        }}
+      >
+        {pokemons.map(({ name, url }: PokemonData) => {
+          return <PokeCard key={name} name={name} url={url} />;
+        })}
+      </div>
 
-      <button>Previous</button>
+      <button onClick={() => getPokemons(previous)}>Previous</button>
       {Math.floor(count / 20)}
-      <button>Next</button>
+      <button onClick={() => getPokemons(next)}>Next</button>
     </>
   );
 };
