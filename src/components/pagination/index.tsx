@@ -27,7 +27,7 @@ export const PokePagination = ({
           <>
             <Pagination.Prev onClick={() => changeFn(active - 1)} />
             <Pagination.First onClick={() => changeFn(0)} />
-            <Pagination.Ellipsis />
+            <Pagination.Ellipsis disabled />
           </>
         )}
 
@@ -35,7 +35,11 @@ export const PokePagination = ({
           .slice(paginationStartSlice, items[active] + 2)
           .map((item: number) => {
             return (
-              <Pagination.Item key={item} active={item === active}>
+              <Pagination.Item
+                key={item}
+                active={item === active}
+                onClick={() => changeFn(item)}
+              >
                 {item + 1}
               </Pagination.Item>
             );
@@ -43,7 +47,7 @@ export const PokePagination = ({
 
         {active < items.length - 2 && (
           <>
-            <Pagination.Ellipsis />
+            <Pagination.Ellipsis disabled />
             <Pagination.Last onClick={() => changeFn(items.length - 1)} />
             <Pagination.Next
               onClick={() =>

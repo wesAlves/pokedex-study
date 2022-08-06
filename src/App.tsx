@@ -29,6 +29,7 @@ const App = () => {
     try {
       const response = await pokedex.get(url);
       // console.log(response.data);
+      //total 1154 pokemons
 
       setCount(response.data.count);
       setPokemons(response.data.results);
@@ -42,11 +43,11 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const handlePagination = (pageNumber: number) => {
-    console.log(pageNumber);
+    // console.log(pageNumber);
     setCurrentPage(pageNumber);
 
     //?limit=20&offset=20"
-    // getPokemons(`/pokemons?limit=20&offset=${pageNumber * 20}`);
+    getPokemons(`/pokemon?limit=20&offset=${pageNumber * 20}`);
   };
 
   useEffect(() => {
