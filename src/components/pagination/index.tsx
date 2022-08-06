@@ -8,6 +8,8 @@ interface PokePaginationProps {
 export const PokePagination = ({ count, active = 4 }: PokePaginationProps) => {
   const items = [...Array(Math.floor(count / 20)).keys()]; //create an array with given number and populate it with the number / by 20 that is my pagination offset
 
+  const paginationStartSlice = active < 4 ? 0 : active - 3;
+
   return (
     <Row>
       <Pagination>
@@ -15,7 +17,7 @@ export const PokePagination = ({ count, active = 4 }: PokePaginationProps) => {
         <Pagination.Prev />
         {active >= 4 && <Pagination.Ellipsis />}
 
-        {items.slice(active, active + 2).map((item: number) => {
+        {items.slice(paginationStartSlice, active + 4).map((item: number) => {
           return (
             <Pagination.Item key={item} active={item === active}>
               {item + 1}
