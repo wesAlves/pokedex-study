@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Container, Row, ThemeProvider } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Pagination,
+  Row,
+  ThemeProvider,
+} from "react-bootstrap";
 import { pokedex } from "./api/api";
 import { PokeCard } from "./components/pokeCard";
 
 import "./App.scss";
+import { PokePagination } from "./components/pagination";
 
 interface PokemonData {
   name: string;
@@ -53,19 +61,7 @@ const App = () => {
             );
           })}
         </Row>
-        <Row>
-          {previous === null ? null : (
-            <Button onClick={() => getPokemons(previous)}>Previous</Button>
-          )}
-
-          {Math.floor(count / 20) /*Total of entries*/}
-
-          {/*1...4|5|6...57 pagination should look like this*/}
-
-          {next === null ? null : (
-            <Button onClick={() => getPokemons(next)}>Next</Button>
-          )}
-        </Row>
+        <PokePagination count={count} />
       </Container>
     </ThemeProvider>
   );
