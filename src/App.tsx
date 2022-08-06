@@ -39,6 +39,16 @@ const App = () => {
     }
   };
 
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const handlePagination = (pageNumber: number) => {
+    console.log(pageNumber);
+    setCurrentPage(pageNumber);
+
+    //?limit=20&offset=20"
+    // getPokemons(`/pokemons?limit=20&offset=${pageNumber * 20}`);
+  };
+
   useEffect(() => {
     getPokemons("/pokemon");
   }, []);
@@ -61,7 +71,13 @@ const App = () => {
             );
           })}
         </Row>
-        <PokePagination count={count} />
+        <PokePagination
+          active={currentPage}
+          count={count}
+          changeFn={(page) => {
+            handlePagination(page);
+          }}
+        />
       </Container>
     </ThemeProvider>
   );
