@@ -17,13 +17,13 @@ interface PokemonAttr {
   stats?: [];
   types?: [];
   weight?: number;
+  moves?: [];
 }
 
 export const PokeDetails = () => {
   const { name } = useParams();
 
   const [pokemon, setPokemon] = useState<PokemonAttr>({} as PokemonAttr);
-  const [evolutionChain, setEvolutionChain] = useState();
 
   const getPokemon = async (name: string) => {
     const response = await pokedex.get(`/pokemon/${name}`);
@@ -34,7 +34,18 @@ export const PokeDetails = () => {
     getPokemon(name as string);
   }, []);
 
-  const { order, height, types, weight, species, abilities, sprites } = pokemon;
+  const {
+    id,
+    order,
+    height,
+    types,
+    weight,
+    species,
+    abilities,
+    sprites,
+    moves,
+    base_experience,
+  } = pokemon;
 
   return (
     <>
@@ -44,21 +55,24 @@ export const PokeDetails = () => {
       />
       <h1 style={{ textTransform: "capitalize" }}>{name} details</h1>
       <div>
+        <p>Name: {name}</p>
+        <p>Id: {id}</p>
         <p>Order: {order}</p>
-        <p>Height: {height}</p>
-        <p>Weight: {weight}</p>
-        <p>Types: {"types"}</p>
-        <p>Evolves from:</p>
-        <p>Evolves to:</p>
-        {/* {Object.entries(pokemon).map((pokeInfo: any) => {
-          console.log(pokeInfo);
-          return (
-            <>
-              <h3>{pokeInfo[0]}</h3>
-              <div>{`${pokeInfo[1]}`}</div>
-            </>
-          );
-        })} */}
+        <p>Height: {Number(height) * 10} cm</p>
+        <p>Weight: {Number(weight) / 10} kg</p>
+        <p>Base experience: {base_experience}</p>
+        <p>
+          Types:{" "}
+          {types?.map((type: any) => {
+            return <span>| {type.type.name} </span>;
+          })}
+        </p>
+        <p>
+          Moves:{" "}
+          {moves?.map((move: any) => (
+            <span>| {move.move.name} </span>
+          ))}
+        </p>
       </div>
     </>
   );
