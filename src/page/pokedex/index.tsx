@@ -57,9 +57,9 @@ export const Pokedex = () => {
         >
           {pokemons.map(({ name, url }: PokemonData) => {
             return (
-              <Col>
-                <PokeCard key={name} name={name} url={url} />
-              </Col>
+              //   <Col>
+              <PokeCard key={name} name={name} url={url} />
+              //   </Col>
             );
           })}
         </Row>

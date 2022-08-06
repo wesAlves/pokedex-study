@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { pokedex } from "../../api/api";
 
 interface PokeCard {
@@ -24,19 +25,21 @@ export const PokeCard = ({ name, url }: PokeCard) => {
   }, []);
 
   return (
-    <div
-      style={{
-        border: "1px solid",
-        borderRadius: "4px",
-        width: "150px",
-        height: "150px",
-        display: "grid",
-        justifyContent: "center",
-        alignContent: "center",
-      }}
-    >
-      <img src={sprite} alt={name} />
-      <h2>{name}</h2>
-    </div>
+    <Link to={`/${name}`}>
+      <div
+        style={{
+          border: "1px solid",
+          borderRadius: "4px",
+          width: "150px",
+          height: "150px",
+          display: "grid",
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
+        <img src={sprite} alt={name} />
+        <h2>{name}</h2>
+      </div>
+    </Link>
   );
 };
