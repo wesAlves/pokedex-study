@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { Button, Container, Row, ThemeProvider } from "react-bootstrap";
 import { pokedex } from "./api/api";
 import { PokeCard } from "./components/pokeCard";
+
+import "./App.scss";
 
 interface PokemonData {
   name: string;
@@ -33,31 +36,26 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          gap: "8px",
-          maxWidth: "800px",
-          flexWrap: "wrap",
-        }}
-      >
-        {pokemons.map(({ name, url }: PokemonData) => {
-          return <PokeCard key={name} name={name} url={url} />;
-        })}
-      </div>
-      {previous === null ? null : (
-        <button onClick={() => getPokemons(previous)}>Previous</button>
-      )}
+    <ThemeProvider breakpoints={["lg", "md", "sm"]}>
+      <Container fluid>
+        <Row as="div" lg={{ cols: 5 }}>
+          {pokemons.map(({ name, url }: PokemonData) => {
+            return <PokeCard key={name} name={name} url={url} />;
+          })}
+        </Row>
+        {previous === null ? null : (
+          <Button onClick={() => getPokemons(previous)}>Previous</Button>
+        )}
 
-      {Math.floor(count / 20) /*Total of entries*/}
+        {Math.floor(count / 20) /*Total of entries*/}
 
-      {/*1...4|5|6...57 pagination should look like this*/}
+        {/*1...4|5|6...57 pagination should look like this*/}
 
-      {next === null ? null : (
-        <button onClick={() => getPokemons(next)}>Next</button>
-      )}
-    </>
+        {next === null ? null : (
+          <Button onClick={() => getPokemons(next)}>Next</Button>
+        )}
+      </Container>
+    </ThemeProvider>
   );
 };
 
