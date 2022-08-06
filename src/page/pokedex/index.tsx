@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ThemeProvider, Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { pokedex } from "../../api/api";
 import { PokePagination } from "../../components/pagination";
 import { PokeCard } from "../../components/pokeCard";
@@ -48,6 +49,9 @@ export const Pokedex = () => {
   return (
     <ThemeProvider breakpoints={["lg", "md", "sm"]}>
       <Container>
+        <Row>
+          <Link to="/favorite">Fovorites</Link>
+        </Row>
         <Row
           as="div"
           lg={5}
@@ -58,7 +62,7 @@ export const Pokedex = () => {
           {pokemons.map(({ name, url }: PokemonData) => {
             return (
               //   <Col>
-              <PokeCard key={name} name={name} url={url} />
+              <PokeCard key={name} id={name} url={url} />
               //   </Col>
             );
           })}

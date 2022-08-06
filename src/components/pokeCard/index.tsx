@@ -3,25 +3,28 @@ import { Link } from "react-router-dom";
 import { pokedex } from "../../api/api";
 
 interface PokeCard {
-  name: string;
+  id: string;
+  // name: string;
   url: string;
 }
 
-export const PokeCard = ({ name, url }: PokeCard) => {
+export const PokeCard = ({ id, url }: PokeCard) => {
   const [sprite, setSprite] = useState();
+  const [name, setName] = useState();
 
   //fetch api to get specific pokemon front_default sprite
-  const getPokemonSprite = async (name: string) => {
+  const getPokemonSprite = async (id: string) => {
     try {
-      const response = await pokedex.get(`pokemon/${name}`);
+      const response = await pokedex.get(`pokemon/${id}`);
       setSprite(response.data.sprites.front_default);
+      setName(response.data.name);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getPokemonSprite(name);
+    getPokemonSprite(id);
   }, []);
 
   return (
