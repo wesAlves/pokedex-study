@@ -39,6 +39,6 @@ To build this app I have used:
   ```
   npm run build
   ```
- #Thank!!!`
+ #Thanks!!!
  
 
