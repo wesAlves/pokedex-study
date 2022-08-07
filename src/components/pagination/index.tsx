@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Button, Pagination } from "react-bootstrap";
+import { Row, Button, Pagination, Col } from "react-bootstrap";
 
 interface PokePaginationProps {
   count: number;
@@ -31,44 +31,42 @@ export const PokePagination = ({
   //   const paginationEndSlice = active <= 1 ? active + 6 : active + 4; //set the first position to slice the array of items
 
   return (
-    <Row>
-      <Pagination>
-        {active >= 2 && (
-          <>
-            <Pagination.Prev onClick={() => changeFn(active - 1)} />
-            <Pagination.First onClick={() => changeFn(0)} />
-            <Pagination.Ellipsis disabled />
-          </>
-        )}
+    <Pagination style={{ width: "fit-content" }}>
+      {active >= 2 && (
+        <>
+          <Pagination.Prev onClick={() => changeFn(active - 1)} />
+          <Pagination.First onClick={() => changeFn(0)} />
+          <Pagination.Ellipsis disabled />
+        </>
+      )}
 
-        {items
-          .slice(paginationStartSlice, items[active] + 2)
-          .map((item: number) => {
-            return (
-              <Pagination.Item
-                key={item}
-                active={item === active}
-                onClick={() => changeFn(item)}
-              >
-                {item + 1}
-              </Pagination.Item>
-            );
-          })}
+      {items
+        .slice(paginationStartSlice, items[active] + 2)
+        .map((item: number) => {
+          return (
+            <Pagination.Item
+              key={item}
+              active={item === active}
+              onClick={() => changeFn(item)}
+            >
+              {item + 1}
+            </Pagination.Item>
+          );
+        })}
 
-        {active < items.length - 2 && (
-          <>
-            <Pagination.Ellipsis disabled />
-            <Pagination.Last onClick={() => changeFn(items.length - 1)} />
-            <Pagination.Next
-              onClick={() =>
-                active < items.length
-                  ? changeFn(active + 1)
-                  : changeFn(active + 1)
-              }
-            />
-          </>
-        )}
-      </Pagination>
-    </Row>
+      {active < items.length - 2 && (
+        <>
+          <Pagination.Ellipsis disabled />
+          <Pagination.Last onClick={() => changeFn(items.length - 1)} />
+          <Pagination.Next
+            onClick={() =>
+              active < items.length
+                ? changeFn(active + 1)
+                : changeFn(active + 1)
+            }
+          />
+        </>
+      )}
+    </Pagination>
   );
 };

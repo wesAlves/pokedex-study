@@ -51,26 +51,25 @@ export const Pokedex = () => {
       <Container>
         <Row
           as="div"
-          lg={5}
-          md={3}
-          sm={1}
-          className="justify-content-md-center"
+          className="justify-content-center"
+          style={{ maxWidth: "960px", margin: "auto" }}
         >
           {pokemons.map(({ name, url }: PokemonData) => {
-            return (
-              //   <Col>
-              <PokeCard key={name} id={name} url={url} />
-              //   </Col>
-            );
+            return <PokeCard key={name} id={name} url={url} />;
           })}
         </Row>
-        <PokePagination
-          active={currentPage}
-          count={count}
-          changeFn={(page) => {
-            handlePagination(page);
-          }}
-        />
+        <Row
+          style={{ margin: "auto", marginTop: "32px" }}
+          className="justify-content-center"
+        >
+          <PokePagination
+            active={currentPage}
+            count={count}
+            changeFn={(page) => {
+              handlePagination(page);
+            }}
+          />
+        </Row>
       </Container>
     </ThemeProvider>
   );

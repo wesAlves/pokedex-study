@@ -28,10 +28,18 @@ export const PokeCard = ({ id, url }: PokeCard) => {
   }, []);
 
   return (
-    <Link to={`/${name}`}>
-      <Card style={{ marginTop: "16px" }}>
-        <img src={sprite} alt={name} />
-        <h4 style={{ textAlign: "center" }}>{name}</h4>
+    <Link
+      to={`/${name}`}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        width: "fit-content",
+      }}
+    >
+      <Card style={{ marginTop: "16px", width: "150px" }}>
+        {/* <img src={sprite} alt={name} /> */}
+        <Card.Img variant="top" src={sprite} alt={name} />
+        <Card.Title style={{ textAlign: "center" }}>{name}</Card.Title>
       </Card>
     </Link>
   );
