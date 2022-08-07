@@ -1,3 +1,4 @@
+import React from "react";
 import { Row, Button, Pagination } from "react-bootstrap";
 
 interface PokePaginationProps {
@@ -13,9 +14,18 @@ export const PokePagination = ({
   active,
   changeFn,
 }: PokePaginationProps) => {
-  const items = [
-    ...Array(count % 20 > 1 ? Math.floor(count / 20) + 1 : count / 20).keys(),
-  ]; //create an array with given number and populate it with the number / by 20 that is my pagination offset
+  if (count / 20 < 1) {
+    return <></>;
+  }
+
+  const paginationItems =
+    count % 20 > 1 ? Math.floor(count / 20) + 1 : count / 20;
+
+  const items = []; //create an array with given number and populate it with the number / by 20 that is my pagination offset
+
+  for (let i = 0; i < paginationItems; i++) {
+    items.push(i);
+  }
 
   const paginationStartSlice = active < 2 ? items[0] : active - 1; //set the first position to slice the array of items
   //   const paginationEndSlice = active <= 1 ? active + 6 : active + 4; //set the first position to slice the array of items
