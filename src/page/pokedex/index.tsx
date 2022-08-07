@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { pokedex } from "../../api/api";
 import { PokePagination } from "../../components/pagination";
 import { PokeCard } from "../../components/pokeCard";
+import MyLoader from "../../components/skeleton";
 
 interface PokemonData {
   name: string;
@@ -56,6 +57,7 @@ export const Pokedex = () => {
         >
           {pokemons.map(({ name, url }: PokemonData) => {
             return <PokeCard key={name} id={name} url={url} />;
+            return <MyLoader />;
           })}
         </Row>
         <Row
