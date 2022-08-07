@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 import { PokePagination } from "./";
 
 describe("Pagination component", () => {
-  it("Should be render when the pokemon list is bigger than 20", () => {
+  it("Should be render when the pokemon list is bigger than 20", async () => {
     const { debug } = render(
       <PokePagination active={0} count={21} changeFn={() => {}} />
     );
