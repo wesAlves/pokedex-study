@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { pokedex } from "../../api/api";
 
@@ -28,20 +29,10 @@ export const PokeCard = ({ id, url }: PokeCard) => {
 
   return (
     <Link to={`/${name}`}>
-      <div
-        style={{
-          border: "1px solid",
-          borderRadius: "4px",
-          width: "150px",
-          height: "150px",
-          display: "grid",
-          justifyContent: "center",
-          alignContent: "center",
-        }}
-      >
+      <Card style={{ marginTop: "16px" }}>
         <img src={sprite} alt={name} />
-        <h2>{name}</h2>
-      </div>
+        <h4 style={{ textAlign: "center" }}>{name}</h4>
+      </Card>
     </Link>
   );
 };
