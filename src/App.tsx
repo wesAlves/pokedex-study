@@ -4,15 +4,12 @@ import { Pokedex } from "./page/pokedex";
 import "./App.scss";
 import { PokeDetails } from "./page/pokemonDetails";
 import { FavoriteList } from "./page/favoriteList";
-import { Row } from "react-bootstrap";
+import { Navbar } from "./components/navbar";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Row>
-        <Link to="/">Pokedex</Link>
-        <Link to="/favorite">Fovorites</Link>
-      </Row>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Pokedex />} />
         <Route path="/:name" element={<PokeDetails />} />

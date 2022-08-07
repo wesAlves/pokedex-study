@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { pokedex } from "../../api/api";
 import { PokePagination } from "../../components/pagination";
 import { PokeCard } from "../../components/pokeCard";
+import MyLoader from "../../components/skeleton";
 
 interface PokemonData {
   name: string;
@@ -51,26 +52,26 @@ export const Pokedex = () => {
       <Container>
         <Row
           as="div"
-          lg={5}
-          md={3}
-          sm={1}
-          className="justify-content-md-center"
+          className="justify-content-center"
+          style={{ maxWidth: "960px", margin: "auto" }}
         >
           {pokemons.map(({ name, url }: PokemonData) => {
-            return (
-              //   <Col>
-              <PokeCard key={name} id={name} url={url} />
-              //   </Col>
-            );
+            return <PokeCard key={name} id={name} url={url} />;
+            return <MyLoader />;
           })}
         </Row>
-        <PokePagination
-          active={currentPage}
-          count={count}
-          changeFn={(page) => {
-            handlePagination(page);
-          }}
-        />
+        <Row
+          style={{ margin: "auto", marginTop: "32px" }}
+          className="justify-content-center"
+        >
+          <PokePagination
+            active={currentPage}
+            count={count}
+            changeFn={(page) => {
+              handlePagination(page);
+            }}
+          />
+        </Row>
       </Container>
     </ThemeProvider>
   );
