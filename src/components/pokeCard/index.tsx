@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { pokedex } from "../../api/api";
 
 interface PokeCard {
   id: string;
-  // name: string;
   url: string;
 }
 
