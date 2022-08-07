@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Container, Row } from "react-bootstrap";
 import { PokeCard } from "../../components/pokeCard";
 
 export const FavoriteList = () => {
@@ -7,10 +8,16 @@ export const FavoriteList = () => {
   );
 
   return (
-    <>
-      {favorites.map((favorite: any) => {
-        return <PokeCard id={favorite} url={""} />;
-      })}
-    </>
+    <Container>
+      <Row
+        as="div"
+        className="justify-content-center"
+        style={{ maxWidth: "960px", margin: "auto" }}
+      >
+        {favorites.map((favorite: any) => {
+          return <PokeCard id={favorite} url={""} />;
+        })}
+      </Row>
+    </Container>
   );
 };

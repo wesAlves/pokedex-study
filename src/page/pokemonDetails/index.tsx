@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Badge, Button, Card, CardImg, Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { pokedex } from "../../api/api";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
 
 interface PokemonAttr {
   abilities?: [];
@@ -99,42 +100,83 @@ export const PokeDetails = () => {
   };
 
   return (
-    <>
-      {favorite ? (
-        <Button onClick={() => removeFromFavorite(id as number)}>
-          Remove from favorite
-        </Button>
-      ) : (
-        <Button onClick={() => addToFavorite(id as number)}>
-          Make favorite
-        </Button>
-      )}
+    <Container style={{ marginTop: "32px" }}>
+      <Card>
+        <Card.Header
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Card.Title as="h2" style={{ textTransform: "capitalize" }}>
+            {name} details
+          </Card.Title>
+          {favorite ? (
+            <div onClick={() => removeFromFavorite(id as number)}>
+              Favorite <BsHeartFill size={24} fill="#f00" />
+            </div>
+          ) : (
+            <div onClick={() => addToFavorite(id as number)}>
+              Favorite <BsHeart size={24} fill="#f00" />
+            </div>
+          )}
+        </Card.Header>
 
-      <img
-        src={sprites === undefined ? "" : sprites.front_default}
-        alt={name}
-      />
-      <h1 style={{ textTransform: "capitalize" }}>{name} details</h1>
-      <div>
-        <p>Name: {name}</p>
-        <p>Id: {id}</p>
-        <p>Order: {order}</p>
-        <p>Height: {Number(height) * 10} cm</p>
-        <p>Weight: {Number(weight) / 10} kg</p>
-        <p>Base experience: {base_experience}</p>
-        <p>
-          Types:{" "}
-          {types?.map((type: any, index: number) => {
-            return <span key={index}>| {type.type.name} </span>;
-          })}
-        </p>
-        <p>
-          Moves:{" "}
-          {moves?.map((move: any, index: number) => (
-            <span key={index}>| {move.move.name} </span>
-          ))}
-        </p>
-      </div>
-    </>
+        <CardImg
+          src={sprites === undefined ? "" : sprites.front_default}
+          alt={name}
+          style={{ maxWidth: "250px", alignSelf: "center" }}
+        />
+
+        <Card.Body>
+          <div style={{ display: "flex", gap: "32px", flexWrap: "wrap" }}>
+            <Card.Text>
+              <b>Id:</b> {id}
+            </Card.Text>
+            <Card.Text>
+              <b>Order:</b> {order}
+            </Card.Text>
+            <Card.Text>
+              <b>Name:</b> {name}
+            </Card.Text>
+            <Card.Text>
+              <b>Height:</b> {Number(height) * 10} cm
+            </Card.Text>
+            <Card.Text>
+              <b>Weight:</b> {Number(weight) / 10} kg
+            </Card.Text>
+            <Card.Text>
+              <b>Base experience:</b> {base_experience}
+            </Card.Text>
+
+            <Card.Text>
+              <b>Types:</b>
+              {types?.map((type: any, index: number) => {
+                return (
+                  <Badge style={{ marginLeft: "8px" }} key={index}>
+                    {type.type.name}{" "}
+                  </Badge>
+                );
+              })}
+            </Card.Text>
+          </div>
+
+          <Card.Text>
+            <b>Moves:</b>
+            {moves?.map((move: any, index: number) => (
+              <Badge
+                style={{ marginLeft: "8px" }}
+                bg="light"
+                text="dark"
+                key={index}
+              >
+                {move.move.name}
+              </Badge>
+            ))}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    </Container>
   );
 };
