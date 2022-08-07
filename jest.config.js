@@ -1,11 +1,12 @@
-module.exports = {
-  testIgonorePatterns: ["/node_modules"],
-  setupFilesAfterEnv: ["<rootDir>/src/tests/setupTests.ts"],
-  transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-  },
-  testEnvironment: "jsdom",
-  moduleNameMapper: {
-    "\\.(scss|css|sass)$": "identity-obj-proxy",
-  },
+const config = {
+  verbose: true,
+};
+
+module.exports = config;
+
+module.exports = async () => {
+  return {
+    verbose: true,
+    testEnvironment: "jsdom",
+  };
 };
