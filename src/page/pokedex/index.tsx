@@ -49,9 +49,6 @@ export const Pokedex = () => {
   return (
     <ThemeProvider breakpoints={["lg", "md", "sm"]}>
       <Container>
-        <Row>
-          <Link to="/favorite">Fovorites</Link>
-        </Row>
         <Row
           as="div"
           lg={5}

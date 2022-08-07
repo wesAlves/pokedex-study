@@ -4,7 +4,6 @@ import { pokedex } from "../../api/api";
 
 interface PokeCard {
   id: string;
-  // name: string;
   url: string;
 }
 
