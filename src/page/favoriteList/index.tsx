@@ -13,7 +13,7 @@ export const FavoriteList = () => {
   //   );
   // }, []);
 
-  if (favorites === null) {
+  if (favorites === null || favorites.length < 1) {
     return (
       <Container>
         <Row
