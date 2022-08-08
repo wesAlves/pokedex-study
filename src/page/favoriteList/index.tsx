@@ -7,6 +7,26 @@ export const FavoriteList = () => {
     JSON.parse(localStorage.getItem("@Pokedex:favorite") as string)
   );
 
+  // useState(() => {
+  //   setFavorites(
+  //     JSON.parse(localStorage.getItem("@Pokedex:favorite") as string)
+  //   );
+  // }, []);
+
+  if (favorites === null) {
+    return (
+      <Container>
+        <Row
+          as="div"
+          className="justify-content-center"
+          style={{ maxWidth: "960px", margin: "auto" }}
+        >
+          Do you have no favorite any pokemon yet!!!
+        </Row>
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <Row
